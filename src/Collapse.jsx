@@ -1,6 +1,7 @@
-import React, { PropTypes, Children }from 'react';
+import React, { PropTypes, Children } from 'react';
 import CollapsePanel from './Panel';
 import openAnimationFactory from './openAnimationFactory';
+import classnames from 'classnames';
 
 function toArray(activeKey) {
   let currentActiveKey = activeKey;
@@ -25,6 +26,9 @@ const Collapse = React.createClass({
     openAnimation: PropTypes.object,
     onChange: PropTypes.func,
     accordion: PropTypes.bool,
+    customClassName: PropTypes.string,
+    activeClassName: PropTypes.string,
+    customAnimClass: PropTypes.string,
   },
 
   statics: {
@@ -41,13 +45,13 @@ const Collapse = React.createClass({
   },
 
   getInitialState() {
-    const { activeKey, defaultActiveKey } = this.props;
+    const { activeKey, defaultActiveKey, prefixCls, customAnimClass } = this.props;
     let currentActiveKey = defaultActiveKey;
     if ('activeKey' in this.props) {
       currentActiveKey = activeKey;
     }
     return {
-      openAnimation: this.props.openAnimation || openAnimationFactory(this.props.prefixCls),
+      openAnimation: this.props.openAnimation || openAnimationFactory(prefixCls, customAnimClass),
       activeKey: toArray(currentActiveKey),
     };
   },
@@ -87,7 +91,7 @@ const Collapse = React.createClass({
 
   getItems() {
     const activeKey = this.state.activeKey;
-    const { prefixCls, accordion } = this.props;
+    const { prefixCls, accordion, activeClassName } = this.props;
     return Children.map(this.props.children, (child, index) => {
       // If there is no key provide, use the panel order as default key
       const key = child.key || String(index);
@@ -104,6 +108,7 @@ const Collapse = React.createClass({
         header,
         isActive,
         prefixCls,
+        activeClassName,
         openAnimation: this.state.openAnimation,
         children: child.props.children,
         onItemClick: this.onClickItem(key).bind(this),
@@ -124,10 +129,15 @@ const Collapse = React.createClass({
 
   render() {
     const prefixCls = this.props.prefixCls;
+    const className = classnames({
+      [prefixCls]: true,
+      [this.props.customClassName]: this.props.customClassName,
+    });
+
     return (
-      <div className={prefixCls}>
-        {this.getItems()}
-      </div>
+        <div className={className}>
+          {this.getItems()}
+        </div>
     );
   },
 });

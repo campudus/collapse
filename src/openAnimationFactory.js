@@ -21,13 +21,14 @@ function animate(node, show, transitionName, done) {
   });
 }
 
-function animation(prefixCls) {
+function animation(prefixCls, customAnimClass) {
+  const animClass = customAnimClass || prefixCls;
   return {
     enter(node, done) {
-      return animate(node, true, `${prefixCls}-anim`, done);
+      return animate(node, true, `${animClass}`, done);
     },
     leave(node, done) {
-      return animate(node, false, `${prefixCls}-anim`, done);
+      return animate(node, false, `${animClass}`, done);
     },
   };
 }
