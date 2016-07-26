@@ -6,6 +6,7 @@ const PanelContent = React.createClass({
     prefixCls: PropTypes.string,
     isActive: PropTypes.bool,
     children: PropTypes.any,
+    inActiveClass: PropTypes.string,
     activeClassName: PropTypes.string,
   },
   shouldComponentUpdate(nextProps) {
@@ -16,12 +17,13 @@ const PanelContent = React.createClass({
     if (!this._isActived) {
       return null;
     }
-    const { prefixCls, isActive, children, activeClassName } = this.props;
+    const { prefixCls, isActive, children, activeClassName, inActiveClass } = this.props;
     const contentCls = classnames({
       [`${prefixCls}-content`]: true,
       [`${activeClassName}`]: isActive,
       [`${prefixCls}-content-active`]: isActive,
       [`${prefixCls}-content-inactive`]: !isActive,
+      [`${inActiveClass}`]: !isActive,
     });
     return (
       <div

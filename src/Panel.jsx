@@ -10,6 +10,8 @@ const CollapsePanel = React.createClass({
       PropTypes.object,
     ]),
     activeClassName: PropTypes.string,
+    customInActiveClass: PropTypes.string,
+    customHeaderClass: PropTypes.string,
     children: PropTypes.any,
     openAnimation: PropTypes.object,
     prefixCls: PropTypes.string,
@@ -35,8 +37,20 @@ const CollapsePanel = React.createClass({
   },
 
   render() {
-    const { className, activeClassName, prefixCls, header, children, isActive } = this.props;
-    const headerCls = `${ prefixCls }-header`;
+    const {
+      className,
+      activeClassName,
+      customInActiveClass,
+      customHeaderClass,
+      prefixCls,
+      header,
+      children,
+      isActive,
+    } = this.props;
+    const headerCls = classNames({
+      [`${ prefixCls }-header`]: true,
+      [`${ customHeaderClass }`]: customHeaderClass,
+    });
     const itemCls = classNames({
       [`${ prefixCls }-item`]: true,
       [`${ activeClassName }`]: isActive,
@@ -62,6 +76,7 @@ const CollapsePanel = React.createClass({
         >
           <PanelContent prefixCls={ prefixCls }
             activeClassName={ activeClassName }
+            inActiveClass={ customInActiveClass }
             isActive={ isActive }
           >
             {children}

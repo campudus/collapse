@@ -29,6 +29,8 @@ const Collapse = React.createClass({
     customClassName: PropTypes.string,
     activeClassName: PropTypes.string,
     customAnimClass: PropTypes.string,
+    customInActiveClass: PropTypes.string,
+    customHeaderClass: PropTypes.string,
   },
 
   statics: {
@@ -91,7 +93,13 @@ const Collapse = React.createClass({
 
   getItems() {
     const activeKey = this.state.activeKey;
-    const { prefixCls, accordion, activeClassName } = this.props;
+    const {
+      prefixCls,
+      accordion,
+      activeClassName,
+      customInActiveClass,
+      customHeaderClass,
+    } = this.props;
     return Children.map(this.props.children, (child, index) => {
       // If there is no key provide, use the panel order as default key
       const key = child.key || String(index);
@@ -109,6 +117,8 @@ const Collapse = React.createClass({
         isActive,
         prefixCls,
         activeClassName,
+        customInActiveClass,
+        customHeaderClass,
         openAnimation: this.state.openAnimation,
         children: child.props.children,
         onItemClick: this.onClickItem(key).bind(this),
