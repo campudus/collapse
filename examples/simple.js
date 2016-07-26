@@ -84,6 +84,11 @@ const Test = React.createClass({
         accordion={accordion}
         onChange={this.onChange}
         activeKey={activeKey}
+        activeClassName="activeClass"
+        customClassName="customClass"
+        customHeaderClass="customHeader"
+        customAnimClass="customAnim"
+        customInActiveClass="customInActive"
       >
         {this.getItems()}
       </Collapse>
