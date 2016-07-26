@@ -28,9 +28,7 @@ describe('collapse', () => {
       document.body.appendChild(node);
 
       ReactDOM.render(
-        <Collapse customClassName="customClassName" customAnimClass="customAnimClass"
-          activeClassName="customActiveClassName" onChange={onChange}
-        >
+        <Collapse onChange={onChange}>
           <Panel header="collapse 1" key="1">first</Panel>
           <Panel header="collapse 2" key="2">second</Panel>
           <Panel header="collapse 3" key="3" className="important">third</Panel>
@@ -46,8 +44,6 @@ describe('collapse', () => {
     });
     it('add className', () => {
       const expectedClassName = 'rc-collapse-item important';
-      expect(findDOMNode(collapse, 'rc-collapse')[0].className)
-          .to.be('rc-collapse customClassName');
       expect(findDOMNode(collapse, 'rc-collapse-item')[2].className).to.be(expectedClassName);
     });
 
