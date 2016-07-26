@@ -31,18 +31,15 @@ const PanelContent = React.createClass({
       [`${activeClassName}`]: isActive,
       [`${prefixCls}-content-active`]: isActive,
       [`${prefixCls}-content-inactive`]: !isActive,
-      [`${inActiveClass}`]: !isActive,
-    });
-    const contentBoxCls = classnames({
-      [`${prefixCls}-content-box`]: true,
       [`${contentWrapperClass}`]: contentWrapperClass,
+      [`${inActiveClass}`]: !isActive,
     });
     return (
       <div
         className={contentCls}
         role="tabpanel"
       >
-        <div className={contentBoxCls}>{children}</div>
+        <div className={`${prefixCls}-content-box`}>{children}</div>
       </div>
     );
   },
