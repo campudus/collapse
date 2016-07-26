@@ -7,6 +7,7 @@ const PanelContent = React.createClass({
     isActive: PropTypes.bool,
     children: PropTypes.any,
     inActiveClass: PropTypes.string,
+    contentWrapperClass: PropTypes.string,
     activeClassName: PropTypes.string,
   },
   shouldComponentUpdate(nextProps) {
@@ -17,7 +18,14 @@ const PanelContent = React.createClass({
     if (!this._isActived) {
       return null;
     }
-    const { prefixCls, isActive, children, activeClassName, inActiveClass } = this.props;
+    const {
+      prefixCls,
+      isActive,
+      children,
+      activeClassName,
+      contentWrapperClass,
+      inActiveClass,
+    } = this.props;
     const contentCls = classnames({
       [`${prefixCls}-content`]: true,
       [`${activeClassName}`]: isActive,
@@ -25,12 +33,16 @@ const PanelContent = React.createClass({
       [`${prefixCls}-content-inactive`]: !isActive,
       [`${inActiveClass}`]: !isActive,
     });
+    const contentBoxCls = classnames({
+      [`${prefixCls}-content-box`]: true,
+      [`${contentWrapperClass}`]: contentWrapperClass,
+    });
     return (
       <div
         className={contentCls}
         role="tabpanel"
       >
-        <div className={`${prefixCls}-content-box`}>{children}</div>
+        <div className={contentBoxCls}>{children}</div>
       </div>
     );
   },
