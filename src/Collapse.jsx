@@ -105,7 +105,7 @@ const Collapse = React.createClass({
     return Children.map(this.props.children, (child, index) => {
       // If there is no key provide, use the panel order as default key
       const idx = child.key || String(index);
-      const key = child.props.index || idx;
+      const key = String(child.props.index) || idx;
       const header = child.props.header;
       let isActive = false;
       if (accordion) {
