@@ -16,6 +16,7 @@ const CollapsePanel = React.createClass({
     children: PropTypes.any,
     openAnimation: PropTypes.object,
     prefixCls: PropTypes.string,
+    index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     header: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
